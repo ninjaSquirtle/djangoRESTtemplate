@@ -1,7 +1,8 @@
-from rest_framework import serializers
+from rest_framework.serializers import HyperlinkedModelSerializer, HyperlinkedIdentityField
 from .models import User
 
-class UserSerializer(serializers.ModelSerializer):
+class UserSerializer(HyperlinkedModelSerializer):
+    url = HyperlinkedIdentityField(view_name="login:user-detail")
     class Meta:
         model = User
-        fields = ('email', 'api_key')
+        fields = ('url', 'id', 'email', 'api_key')
